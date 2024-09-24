@@ -29,7 +29,9 @@ class FollowViewSet(viewsets.ModelViewSet):
         return queryset
 
     def retrieve(self, request, *args, **kwargs):
-        return Response({"detail": "Not Found"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {"detail": "Not Found"}, status=status.HTTP_404_NOT_FOUND
+        )
 
 
 class PostViewSet(viewsets.ModelViewSet):
