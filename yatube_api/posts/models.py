@@ -1,8 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
-
-from yatube_api.settings import STR_OUTPUT_SLICE
+from django.conf import settings
 
 
 User = get_user_model()
@@ -12,11 +11,11 @@ class Follow(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        related_name='following',
         verbose_name='Пользователь',
     )
     following = models.ForeignKey(
         User,
-        related_name='following',
         on_delete=models.CASCADE,
         verbose_name='Подписка',
     )
@@ -24,12 +23,12 @@ class Follow(models.Model):
     class Meta:
         verbose_name = 'подписка'
         verbose_name_plural = 'Подписки'
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
-                fields=['user', 'following'],
+                fields=('user', 'following'),
                 name='unique_name_owner'
-            )
-        ]
+            ),
+        )
 
     def clean(self):
         if self.user == self.following:
@@ -51,7 +50,7 @@ class Group(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.title[:STR_OUTPUT_SLICE]
+        return self.title[:settings.STR_OUTPUT_SLICE]
 
 
 class Post(models.Model):
@@ -70,8 +69,11 @@ class Post(models.Model):
         related_name='posts', blank=True, null=True
     )
 
+    class Meta:
+        ordering = ('-pub_date', )
+
     def __str__(self):
-        return self.text[:STR_OUTPUT_SLICE]
+        return self.text[:settings.STR_OUTPUT_SLICE]
 
 
 class Comment(models.Model):
