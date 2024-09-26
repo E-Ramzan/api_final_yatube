@@ -101,4 +101,5 @@ GET: http://127.0.0.1:8000/api/v1/posts/{id}/
 Итд
 
 # Реквизиты
-Автор: https://github.com/Griver2006
+Автор: Элиханов Рамзан
+GitHub: https://github.com/Griver2006
