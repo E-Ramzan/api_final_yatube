@@ -11,7 +11,7 @@
 # Как запустить проект:
 Клонировать репозиторий и перейти в него в командной строке:
 ```bash
-git clone https://github.com/Griver2006/api_final_yatube.git
+git clone https://github.com/E-Ramzan/api_final_yatube.git
 ```
 ```
 cd api_final_yatube
